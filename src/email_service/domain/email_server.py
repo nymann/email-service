@@ -1,14 +1,10 @@
 from abc import ABC
 from abc import abstractmethod
 from email.message import EmailMessage
-import logging
 from smtplib import SMTP
 from smtplib import SMTP_SSL
-import sys
 
 from email_service.core.config import Config
-
-logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 
 
 class EmailServer(ABC):
@@ -26,7 +22,6 @@ class DummyThiccEmailServer(EmailServer):
         self.messages: list[EmailMessage] = []
 
     def send_email(self, message: EmailMessage) -> None:
-        logging.info("Sending email from '%s' to '%s'", message["From"], message["To"])
         self.messages.append(message)
 
 

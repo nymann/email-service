@@ -1,8 +1,12 @@
 from email.message import EmailMessage
 from email.utils import formatdate
+import logging
+import sys
 
 from email_service.domain.email_schema import EmailRequest
 from email_service.domain.email_server import EmailServer
+
+logging.basicConfig(stream=sys.stdout, level=logging.INFO)
 
 
 class EmailService:
@@ -19,3 +23,9 @@ class EmailService:
         msg["To"] = message.to_address
         msg["Date"] = formatdate(localtime=True)
         self.email_server.send_email(message=msg)
+        logging.info(
+            "'%s' from '%s' to '%s'",
+            message.subject,
+            message.from_address,
+            message.to_address,
+        )

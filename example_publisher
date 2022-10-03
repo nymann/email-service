@@ -8,7 +8,7 @@ from email_service.domain.publisher import EmailPublisher
 fake = Faker()
 config = Config()
 publisher = EmailPublisher(host=config.kafka_host, port=config.kafka_port)
-for i in range(5):
+for i in range(20):
     request = EmailRequest(
         from_address=config.username,
         to_address=config.username,
