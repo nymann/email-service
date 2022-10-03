@@ -5,7 +5,6 @@ COPY --chown=$USERNAME:$USERNAME . .
 RUN make install
 
 FROM nymann/debian-python3:$DEBIAN_VERSION
-EXPOSE 80
 USER $USERNAME
 COPY --from=compile-image --chown=$USERNAME:$USERNAME "$VENV" "$VENV"
-CMD uvicorn email_service.asgi:api --port 80 --host 0.0.0.0
+CMD email_service
