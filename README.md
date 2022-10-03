@@ -11,6 +11,9 @@ _Send emails via Kafka messaging._
 - [x] CC Support
 - [x] BCC Support
 
+### Usage
+See [example_publisher](example_publisher)
+
 ### Notes
 
 How to implement configurable templates?
