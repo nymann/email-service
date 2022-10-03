@@ -10,7 +10,7 @@ def main() -> None:
     email_service = EmailService(email_server=email_server)
     consumer = EmailConsumer(config=config)
     for message in consumer.consume():
-        email_service.send(message=message)
+        email_service.send(request=message)
 
 
 if __name__ == "__main__":

@@ -1,19 +1,35 @@
 #!/usr/bin/env python3
+from pathlib import Path
+
 from faker import Faker
+import typer
 
 from email_service.domain.consumer import Config
 from email_service.domain.consumer import EmailRequest
+from email_service.domain.email_schema import Attachment
+from email_service.domain.email_schema import EmailAddress
 from email_service.domain.publisher import EmailPublisher
 
-fake = Faker()
-config = Config()
-publisher = EmailPublisher(host=config.kafka_host, port=config.kafka_port)
-for i in range(20):
-    request = EmailRequest(
-        from_address=config.username,
-        to_address=config.username,
-        text=fake.text(),
-        html=None,
-        subject=f"[{i}] Performance test",
-    )
-    publisher.publish(request)
+
+def main(attachments: list[Path]) -> None:
+    fake = Faker()
+    config = Config()
+    publisher = EmailPublisher(host=config.kafka_host, port=config.kafka_port)
+    contact = EmailAddress(name="Test, nymann.dev", email="test@nymann.dev")
+    atc = [Attachment.from_file(attachment=attachment) for attachment in attachments]
+    ccs = [contact]
+    for i in range(20):
+        request = EmailRequest(
+            from_address=contact,
+            to_address=contact,
+            text=fake.text(),
+            html=None,
+            cc=ccs,
+            subject=f"[{i}] Performance test",
+            attachments=atc,
+        )
+        publisher.publish(request)
+
+
+if __name__ == "__main__":
+    typer.run(main)
