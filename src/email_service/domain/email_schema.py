@@ -70,6 +70,7 @@ class EmailRequest(BaseModel):
                 attachment.binary_data,
                 maintype=attachment.maintype,
                 subtype=attachment.subtype,
+                filename=attachment.filename,
             )
 
         return msg
