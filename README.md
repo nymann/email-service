@@ -7,9 +7,9 @@ _Send emails via Kafka messaging._
 - [x] Publish/Consumer
 - [x] Send emails
 - [ ] Template support
-- [ ] Attachment support
-- [ ] CC Support
-- [ ] BCC Support
+- [x] Attachment support
+- [x] CC Support
+- [x] BCC Support
 
 ### Notes
 
