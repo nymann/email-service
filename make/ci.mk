@@ -1,7 +1,7 @@
-DOCKER_REPO?=email-service
+DOCKER_REPO?=registry.nymann.dev/email-service
 DOCKER_TAG?=${DOCKER_REPO}:$(shell git describe --tag --always | grep -oE '[0-9]+\.[0-9]+\.[0-9]+')
 
-package: ${VERSION} setup.py
+package: install-package
 	@python setup.py sdist bdist_wheel
 
 docker-build: ${VERSION}
